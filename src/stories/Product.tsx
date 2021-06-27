@@ -21,21 +21,33 @@ const useStyles = makeStyles({
         backgroundColor: 'rgba(0,0,0,0.04)',
     },
     content: {
-        padding: 24,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start'
+        padding: '24px 24px 0 24px',
     },
     discount: {
-        alignSelf: 'start'
+        margin: '0 24px 24px 24px',
     },
-    heading: {
-        fontSize: 20,
-        fontWeight: 'bold',
+    price: {
+        display: 'inline-block',
+        // fontSize: 20,
+        // fontWeight: 'bold',
+        textAlign: 'center',
         marginBottom: '0.4em',
+        position: 'relative',
+        '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: '50%',
+            width: '100%',
+            height: 1,
+            display: 'block',
+            background: '#f91155',
+            transform: 'rotate(-3deg)'
+        }
     },
-    body: {
+    description: {
+        margin: 10,
         fontSize: 16,
+        fontStyle: "italic",
         color: 'rgba(0,0,0,0.72)',
     },
     shadow: {
@@ -46,7 +58,6 @@ const useStyles = makeStyles({
         }
     },
     cta: {
-        marginTop: 24,
         textTransform: "initial"
     }
 });
@@ -62,8 +73,11 @@ export const Product: React.FC = () => {
             />
             <CardContent className={classes.content}>
                 <Badge className={classes.discount} badgeContent={'-30%'} color={'primary'}/>
-                <Typography className={classes.heading} component={'h4'}>Defender mousemat</Typography>
-                <Typography className={classes.body}>Description</Typography>
+                <div style={ {display: 'flex', flexDirection: 'column', alignItems: 'center'} }>
+                    <Typography className={classes.price} component={'h4'}>$5.5</Typography>
+                    <Typography component={'h5'}>Defender Cerberus mousemat</Typography>
+                    <Typography className={classes.description}>The burning spirit of victory</Typography>
+                </div>
             </CardContent>
             <CardActions>
                 <Button color="primary" fullWidth className={classes.cta}>

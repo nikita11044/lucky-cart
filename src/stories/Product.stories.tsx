@@ -9,4 +9,4 @@ export default {
 
 const Template: ComponentStory<typeof Product> = () => <Product/>;
 
-export const Demo = Template.bind({})
+export const ProductCardInShop = Template.bind({})
