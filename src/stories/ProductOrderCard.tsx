@@ -52,6 +52,12 @@ const useStyles = makeStyles({
             transform: 'rotate(-3deg)'
         }
     },
+    description: {
+        margin: 10,
+        fontSize: 16,
+        fontStyle: "italic",
+        color: 'rgba(0,0,0,0.72)',
+    },
     shadow: {
         transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
         '&:hover': {
@@ -82,6 +88,7 @@ export const ProductOrderCard: React.FC = () => {
                     <Typography className={classes.price} component={'h4'}>$5.5</Typography>
                     <Typography component={'h5'}>Defender Cerberus mousemat</Typography>
                 </CardContent>
+                <Typography className={classes.description}>The burning spirit of victory</Typography>
                 <CardActions className={classes.cardActions}>
                     <IconButton color="primary" className={classes.cta}>
                         <RemoveIcon/>
