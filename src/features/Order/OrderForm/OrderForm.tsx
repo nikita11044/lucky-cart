@@ -1,8 +1,8 @@
 import {Button, FormGroup, Grid, TextField} from "@material-ui/core";
 
 export const OrderForm: React.FC = () => {
-    return <Grid container justify={'center'}>
-        <Grid item xs={4}>
+    return <Grid container justify={'center'} style={ {minWidth: 500} }>
+        <Grid item xs={6} style={ {width: '100%'} }>
             <form>
                 <FormGroup>
                     <TextField label={'Name'} margin={'normal'}/>

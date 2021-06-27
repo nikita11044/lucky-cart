@@ -1,4 +1,4 @@
-import {ProductOrderCard} from "./ProductOrderCard";
+import {ProductOrderCard} from "../features/Order/ProductOrderCard/ProductOrderCard";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import React from "react";
 

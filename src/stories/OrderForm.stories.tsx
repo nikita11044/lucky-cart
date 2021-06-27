@@ -1,4 +1,4 @@
-import {OrderForm} from "./OrderForm";
+import {OrderForm} from "../features/Order/OrderForm/OrderForm";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 
 export default {

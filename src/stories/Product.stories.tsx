@@ -1,4 +1,4 @@
-import {Product} from "./Product";
+import {Product} from "../features/Shop/Product/Product";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import React from "react";
 
