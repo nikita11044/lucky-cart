@@ -4,6 +4,7 @@ export type ProductType = {
     description: string
     imageURL: string
     quantity: number
+    discount: number
 }
 
 export type ProductDomainType = ProductType & {id: string}

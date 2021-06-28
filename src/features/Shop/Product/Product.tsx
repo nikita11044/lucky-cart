@@ -11,7 +11,8 @@ import {ProductDomainType} from "../../../api/types";
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 304,
+        minWidth: 320,
+        minHeight: 351,
         margin: 'auto',
         borderRadius: 0,
     },
@@ -23,11 +24,16 @@ const useStyles = makeStyles({
     },
     content: {
         padding: '24px 24px 0 24px',
+        position: 'relative'
     },
     discount: {
-        margin: '0 24px 24px 24px',
+        position: 'absolute',
+        left: '10%'
     },
     price: {
+        fontWeight: "bold"
+    },
+    formerPrice: {
         display: 'inline-block',
         // fontSize: 20,
         // fontWeight: 'bold',
@@ -45,10 +51,14 @@ const useStyles = makeStyles({
             transform: 'rotate(-3deg)'
         }
     },
+    title: {
+      textAlign: "center"
+    },
     description: {
         margin: 10,
-        fontSize: 16,
+        fontSize: 14,
         fontStyle: "italic",
+        textAlign: "center",
         color: 'rgba(0,0,0,0.72)',
     },
     shadow: {
@@ -77,10 +87,20 @@ export const Product = React.memo(function ({product}: PropsType) {
                 image={product.imageURL}
             />
             <CardContent className={classes.content}>
-                <Badge className={classes.discount} badgeContent={'-30%'} color={'primary'}/>
+                {
+                    product.discount !== 0
+                    && <Badge className={classes.discount} badgeContent={`-${Math.round(product.discount * 100)}%`} color={'primary'}/>
+                }
                 <div style={ {display: 'flex', flexDirection: 'column', alignItems: 'center'} }>
-                    <Typography className={classes.price} component={'h4'}>$5.5</Typography>
-                    <Typography component={'h5'}>
+                    {
+                        product.discount !== 0
+                        && <div style={ {display: "flex", gap: '5px'} }>
+                            <Typography className={classes.price}>{'$' + (product.price * product.discount).toFixed(2) }</Typography>
+                            <Typography className={classes.formerPrice} component={'h4'}>{'$' + product.price}</Typography>
+                        </div>
+                        || <Typography className={classes.price}>{'$' + product.price}</Typography>
+                    }
+                    <Typography className={classes.title} component={'h5'}>
                         {product.title}
                     </Typography>
                     <Typography className={classes.description}>

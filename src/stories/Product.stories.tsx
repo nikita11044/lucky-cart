@@ -17,6 +17,7 @@ ProductCardDemo.args = {
         quantity: 3,
         price: 26,
         imageURL: 'https://firebasestorage.googleapis.com/v0/b/lucky-cart.appspot.com/o/sven.jpg?alt=media&token=5304f08e-6078-4a34-b34a-cd7074d3bb3b',
-        title: 'Sven KB-G8500 wired keyboard'
+        title: 'Sven KB-G8500 wired keyboard',
+        discount: 0.28
     }
 }
