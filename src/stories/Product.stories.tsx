@@ -7,6 +7,16 @@ export default {
     component: Product
 } as ComponentMeta<typeof Product>
 
-const Template: ComponentStory<typeof Product> = () => <Product/>;
+const Template: ComponentStory<typeof Product> = (args) => <Product {...args}/>;
 
 export const ProductCardDemo = Template.bind({})
+ProductCardDemo.args = {
+    product: {
+        id: 'GJMrXVFa26yOBODobxHc',
+        description: 'Typing has never been so satisfying',
+        quantity: 3,
+        price: 26,
+        imageURL: 'https://firebasestorage.googleapis.com/v0/b/lucky-cart.appspot.com/o/sven.jpg?alt=media&token=5304f08e-6078-4a34-b34a-cd7074d3bb3b',
+        title: 'Sven KB-G8500 wired keyboard'
+    }
+}

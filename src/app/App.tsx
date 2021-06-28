@@ -5,8 +5,17 @@ import {ShoppingCartOutlined} from "@material-ui/icons";
 import {NavLink, Route } from 'react-router-dom';
 import {Shop} from "../features/Shop/Shop";
 import {Order} from "../features/Order/Order";
+import {productsAPI} from "../api/shop-api";
 
 function App() {
+
+    productsAPI.getProducts().then(querySnapshot => {
+        console.log(querySnapshot)
+        querySnapshot.forEach(doc => {
+            console.log(doc)
+            console.log(doc.id, ' => ', doc.data())
+        })
+    })
 
     return (
         <div>

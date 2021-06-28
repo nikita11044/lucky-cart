@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Badge} from "@material-ui/core";
+import {ProductDomainType} from "../../../api/types";
 
 const useStyles = makeStyles({
     root: {
@@ -62,21 +63,29 @@ const useStyles = makeStyles({
     }
 });
 
-export const Product: React.FC = () => {
+type PropsType = {
+   product: ProductDomainType
+}
+
+export const Product = React.memo(function ({product}: PropsType) {
     const classes = useStyles();
 
     return (
         <Card className={classes.root + ' ' + classes.shadow}>
             <CardMedia
                 className={classes.media}
-                image="https://firebasestorage.googleapis.com/v0/b/lucky-cart.appspot.com/o/3036536.50556__Cerberus_XXL.1920x1014.png?alt=media&token=59bf794b-0060-4d77-914f-269308f0d6a9"
+                image={product.imageURL}
             />
             <CardContent className={classes.content}>
                 <Badge className={classes.discount} badgeContent={'-30%'} color={'primary'}/>
                 <div style={ {display: 'flex', flexDirection: 'column', alignItems: 'center'} }>
                     <Typography className={classes.price} component={'h4'}>$5.5</Typography>
-                    <Typography component={'h5'}>Defender Cerberus mousemat</Typography>
-                    <Typography className={classes.description}>The burning spirit of victory</Typography>
+                    <Typography component={'h5'}>
+                        {product.title}
+                    </Typography>
+                    <Typography className={classes.description}>
+                        {product.description}
+                    </Typography>
                 </div>
             </CardContent>
             <CardActions>
@@ -86,5 +95,5 @@ export const Product: React.FC = () => {
             </CardActions>
         </Card>
     );
-}
+})
 
