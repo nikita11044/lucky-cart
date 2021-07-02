@@ -1,14 +1,14 @@
 import {Grid} from "@material-ui/core";
-import {Product} from "./Product/Product";
 import {useEffect} from "react";
 import {useActions} from "../../utils/redux-utils";
-import {productsActions} from "./index";
+import {selectAllProducts} from "./Product/selectors";
 import {useSelector} from "react-redux";
-import {selectProducts} from "./selectors";
+import {productsActions} from "./index";
+import {Product} from "./Product/index";
 
 export const Shop: React.FC = () => {
 
-    const products = useSelector(selectProducts)
+    const products = useSelector(selectAllProducts)
 
     const {fetchProducts} = useActions(productsActions)
 

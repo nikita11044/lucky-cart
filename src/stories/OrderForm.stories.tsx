@@ -1,8 +1,8 @@
-import {OrderForm} from "../features/Order/OrderForm/OrderForm";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
+import {OrderForm} from "../features/Cart/OrderForm/OrderForm";
 
 export default {
-    title: 'Order Stories',
+    title: 'Cart Stories',
     component: OrderForm
 } as ComponentMeta<typeof OrderForm>
 

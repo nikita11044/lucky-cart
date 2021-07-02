@@ -1,5 +1,5 @@
 import {db} from "../app/base";
-import {ProductType} from "./types";
+import {ProductDomainType} from "./types";
 
 export const productsAPI = {
     getProducts() {
@@ -8,11 +8,12 @@ export const productsAPI = {
     }
 }
 
-export const ordersAPI = {
-    createOrder(products: ProductType[]) {
-        const promise = db.collection('orders').add({
-            productsOrdered: products
+export const cartAPI = {
+    addProductToCart(product: ProductDomainType) {
+        const {id, title, price, discount, description, imageURL, quantity} = product
+        const promise = db.collection('cart').doc(id).set({
+            title, price, discount, description, imageURL, quantity
         })
         return promise
-   }
+    }
 }

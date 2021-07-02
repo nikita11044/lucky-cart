@@ -1,4 +1,5 @@
-import {asyncActions as productsAsyncActions, slice as productsSlice} from "./products-reducer";
+import { Shop } from "./Shop";
+import {productsAsyncActions, productsSlice} from "./Product";
 
 const productsActions = {
     ...productsAsyncActions,
@@ -9,5 +10,6 @@ const productsReducer = productsSlice.reducer
 
 export {
     productsActions,
-    productsReducer
+    productsReducer,
+    Shop
 }

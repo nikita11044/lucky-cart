@@ -2,20 +2,11 @@ import React from 'react';
 import './App.css';
 import {AppBar, Badge, Container, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {ShoppingCartOutlined} from "@material-ui/icons";
-import {NavLink, Route } from 'react-router-dom';
-import {Shop} from "../features/Shop/Shop";
-import {Order} from "../features/Order/Order";
-import {productsAPI} from "../api/shop-api";
+import {NavLink, Route} from 'react-router-dom';
+import {Cart} from "../features/Cart";
+import {Shop} from "../features/Shop";
 
 function App() {
-
-    productsAPI.getProducts().then(querySnapshot => {
-        console.log(querySnapshot)
-        querySnapshot.forEach(doc => {
-            console.log(doc)
-            console.log(doc.id, ' => ', doc.data())
-        })
-    })
 
     return (
         <div>
@@ -25,7 +16,7 @@ function App() {
                         Lucky Cart
                     </Typography>
                     <div style={ {flexGrow: 1} }/>
-                    <NavLink to={'/order'}>
+                    <NavLink to={'/cart'}>
                         <IconButton>
                             <Badge badgeContent={3} color={'secondary'}>
                                 <ShoppingCartOutlined style={ {fill: 'white'} }/>
@@ -36,7 +27,7 @@ function App() {
             </AppBar>
             <Container fixed>
                 <Route exact path={'/'} render={() => <Shop/>}/>
-                <Route exact path={'/order'} render={() => <Order/>}/>
+                <Route exact path={'/cart'} render={() => <Cart/>}/>
             </Container>
         </div>
     );

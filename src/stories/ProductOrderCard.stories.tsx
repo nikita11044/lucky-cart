@@ -1,12 +1,12 @@
-import {ProductOrderCard} from "../features/Order/ProductOrderCard/ProductOrderCard";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import React from "react";
+import {ProductInCart} from "../features/Cart/ProductInCart/ProductInCart";
 
 export default {
-    title: 'Order Stories',
-    component: ProductOrderCard
-} as ComponentMeta<typeof ProductOrderCard>
+    title: 'Cart Stories',
+    component: ProductInCart
+} as ComponentMeta<typeof ProductInCart>
 
-const Template: ComponentStory<typeof ProductOrderCard> = () => <ProductOrderCard/>;
+const Template: ComponentStory<typeof ProductInCart> = () => <ProductInCart/>;
 
-export const ProductCardInOrder = Template.bind({})
+export const ProductInCartDemo = Template.bind({})

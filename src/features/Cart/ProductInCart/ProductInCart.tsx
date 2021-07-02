@@ -74,7 +74,7 @@ const useStyles = makeStyles({
     }
 });
 
-export const ProductOrderCard: React.FC = () => {
+export const ProductInCart: React.FC = () => {
     const classes = useStyles()
 
     return (
