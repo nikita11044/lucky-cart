@@ -8,12 +8,9 @@ export const productsAPI = {
     }
 }
 
-export const cartAPI = {
-    addProductToCart(product: ProductDomainType) {
-        const {id, title, price, discount, description, imageURL, quantity} = product
-        const promise = db.collection('cart').doc(id).set({
-            title, price, discount, description, imageURL, quantity
-        })
+export const ordersAPI = {
+    createOrder(products: ProductDomainType[]) {
+        const promise = db.collection('orders').doc().set(products)
         return promise
     }
 }

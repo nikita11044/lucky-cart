@@ -8,6 +8,7 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import {ProductDomainType} from "../../../api/types";
 
 const useStyles = makeStyles({
     root: {
@@ -74,8 +75,22 @@ const useStyles = makeStyles({
     }
 });
 
-export const ProductInCart: React.FC = () => {
+type PropsType = {
+    product: ProductDomainType
+}
+
+export const ProductInCart = React.memo(function ({product}: PropsType) {
     const classes = useStyles()
+
+    const {
+        imageURL,
+        description,
+        price,
+        quantity,
+        title,
+        discount,
+        id
+    } = product
 
     return (
         <Card className={classes.root + ' ' + classes.shadow}>
@@ -101,4 +116,4 @@ export const ProductInCart: React.FC = () => {
             </div>
         </Card>
     );
-}
+})

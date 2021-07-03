@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Badge} from "@material-ui/core";
 import {ProductDomainType} from "../../../api/types";
+import {useActions} from "../../../utils/redux-utils";
+import {cartActions} from "../../Cart";
 
 const useStyles = makeStyles({
     root: {
@@ -80,6 +82,8 @@ type PropsType = {
 export const Product = React.memo(function ({product}: PropsType) {
     const classes = useStyles();
 
+    const {addProductToCart} = useActions(cartActions)
+
     return (
         <Card className={classes.root + ' ' + classes.shadow}>
             <CardMedia
@@ -109,7 +113,7 @@ export const Product = React.memo(function ({product}: PropsType) {
                 </div>
             </CardContent>
             <CardActions>
-                <Button color="primary" fullWidth className={classes.cta}>
+                <Button color="primary" fullWidth className={classes.cta} onClick={() => addProductToCart({product: product})}>
                     Buy
                 </Button>
             </CardActions>
