@@ -1,4 +1,4 @@
-export type ProductType = {
+export interface IProductType {
     title: string
     price: number
     description: string
@@ -7,4 +7,5 @@ export type ProductType = {
     discount: number
 }
 
-export type ProductDomainType = ProductType & {id: string}
+export interface IProductInStore extends IProductType {id: string}
+export interface IProductInCart extends IProductType {id: string, quantityInCart: number}

@@ -1,12 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ProductDomainType} from "../../api/types";
+import {IProductInCart, IProductInStore} from "../../api/types";
 
 export const slice = createSlice({
     name: 'cart',
-    initialState: [] as ProductDomainType[],
+    initialState: [] as IProductInCart[],
     reducers: {
-        addProductToCart(state, action: PayloadAction<{ product: ProductDomainType }>) {
-            state.push({...action.payload.product})
+        addProductToCart(state, action: PayloadAction<{ product: IProductInCart }>) {
+            const index = state.findIndex(product => product.id === action.payload.product.id)
+            if (index < 0) state.push({...action.payload.product})
         },
         removeProductFromCart(state, action: PayloadAction<{ id: string }>) {
             const index = state.findIndex(product => product.id === action.payload.id)
@@ -14,9 +15,12 @@ export const slice = createSlice({
                 state.splice(index, 1)
             }
         },
-        changeProductQuantity(state, action: PayloadAction<{ id: string, quantity: number }>) {
+        changeProductQuantityInCart(state, action: PayloadAction<{ id: string, quantityInCart: number }>) {
             const index = state.findIndex(product => product.id === action.payload.id)
-            state[index].quantity = action.payload.quantity
+            console.log(state[index].quantityInCart)
+            console.log(action.payload.quantityInCart)
+            state[index].quantityInCart = action.payload.quantityInCart
+            console.log(state[index].quantityInCart)
         }
     },
 })

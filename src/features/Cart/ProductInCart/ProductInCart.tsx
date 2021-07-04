@@ -4,11 +4,13 @@ import CardContent from "@material-ui/core/CardContent";
 import {IconButton} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
-import React from "react";
+import React, {useCallback} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import {ProductDomainType} from "../../../api/types";
+import {IProductInCart} from "../../../api/types";
+import {useActions} from "../../../utils/redux-utils";
+import {cartActions} from "../index";
 
 const useStyles = makeStyles({
     root: {
@@ -76,40 +78,67 @@ const useStyles = makeStyles({
 });
 
 type PropsType = {
-    product: ProductDomainType
+    product: IProductInCart
 }
 
 export const ProductInCart = React.memo(function ({product}: PropsType) {
     const classes = useStyles()
 
+    const {changeProductQuantityInCart, removeProductFromCart} = useActions(cartActions)
+
     const {
-        imageURL,
+        id,
         description,
-        price,
         quantity,
-        title,
+        quantityInCart,
+        price,
         discount,
-        id
+        imageURL,
+        title
     } = product
+
+    const currentPrice = discount === 0
+        ? price
+        : (product.price * product.discount).toFixed(2)
+
+    const changeProductQuantityCallback = useCallback((e) => {
+        if (e.currentTarget.dataset.math) {
+            // debugger
+            const trigger: string = e.currentTarget.dataset.math
+            if (trigger === '+') {
+                const newQuantity = quantityInCart + 1
+                if (newQuantity <= quantity) changeProductQuantityInCart({id: id, quantityInCart: newQuantity})
+            } else {
+                if (trigger === '-') {
+                    const newQuantity = quantityInCart - 1
+                    if (newQuantity > 0) {
+                        changeProductQuantityInCart({id: id, quantityInCart: newQuantity})
+                    } else {
+                        removeProductFromCart({id: id})
+                    }
+                }
+            }
+        }
+    }, [])
 
     return (
         <Card className={classes.root + ' ' + classes.shadow}>
             <CardMedia
                 className={classes.media}
-                image="https://firebasestorage.googleapis.com/v0/b/lucky-cart.appspot.com/o/3036536.50556__Cerberus_XXL.1920x1014.png?alt=media&token=59bf794b-0060-4d77-914f-269308f0d6a9"
+                image={imageURL}
             />
             <div className={classes.contentInnerWrapper}>
                 <CardContent className={classes.content}>
-                    <Typography className={classes.price} component={'h4'}>$5.5</Typography>
-                    <Typography component={'h5'}>Defender Cerberus mousemat</Typography>
+                    <Typography className={classes.price} component={'h4'}>{'$' + currentPrice }</Typography>
+                    <Typography component={'h5'}>{title}</Typography>
                 </CardContent>
-                <Typography className={classes.description}>The burning spirit of victory</Typography>
+                <Typography className={classes.description}>{description}</Typography>
                 <CardActions className={classes.cardActions}>
-                    <IconButton color="primary" className={classes.cta}>
+                    <IconButton color="primary" className={classes.cta} data-math={'-'} onClick={(e) => changeProductQuantityCallback(e)}>
                         <RemoveIcon/>
                     </IconButton>
-                    0
-                    <IconButton color="primary" className={classes.cta}>
+                    {quantityInCart}
+                    <IconButton color="primary" className={classes.cta} data-math={'+'} onClick={(e) => changeProductQuantityCallback(e)}>
                         <AddIcon/>
                     </IconButton>
                 </CardActions>

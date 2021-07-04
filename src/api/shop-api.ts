@@ -1,5 +1,5 @@
 import {db} from "../app/base";
-import {ProductDomainType} from "./types";
+import {IProductInStore} from "./types";
 
 export const productsAPI = {
     getProducts() {
@@ -9,7 +9,7 @@ export const productsAPI = {
 }
 
 export const ordersAPI = {
-    createOrder(products: ProductDomainType[]) {
+    createOrder(products: IProductInStore[]) {
         const promise = db.collection('orders').doc().set(products)
         return promise
     }

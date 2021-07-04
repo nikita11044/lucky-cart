@@ -3,10 +3,13 @@ import './App.css';
 import {AppBar, Badge, Container, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {ShoppingCartOutlined} from "@material-ui/icons";
 import {NavLink, Route} from 'react-router-dom';
-import {Cart} from "../features/Cart";
+import {Cart, cartSelectors} from "../features/Cart";
 import {Shop} from "../features/Shop";
+import {useSelector} from "react-redux";
 
 function App() {
+
+    const productsInCart = useSelector(cartSelectors.selectProductsInCart)
 
     return (
         <div>
@@ -18,7 +21,7 @@ function App() {
                     <div style={ {flexGrow: 1} }/>
                     <NavLink to={'/cart'}>
                         <IconButton>
-                            <Badge badgeContent={3} color={'secondary'}>
+                            <Badge badgeContent={productsInCart.length} color={'secondary'}>
                                 <ShoppingCartOutlined style={ {fill: 'white'} }/>
                             </Badge>
                         </IconButton>

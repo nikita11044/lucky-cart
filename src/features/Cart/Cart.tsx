@@ -12,8 +12,8 @@ export const Cart: React.FC = () => {
         <Grid item container spacing={2} direction="column" >
             {
                 productsInCart.map(pr => {
-                    return <Grid item>
-                        <ProductInCart/>
+                    return <Grid key={pr.id} item>
+                        <ProductInCart product={pr}/>
                     </Grid>
                 })
             }

@@ -1,7 +1,7 @@
-import {ProductDomainType} from "../../../api/types";
+import {IProductInStore} from "../../../api/types";
 import {productsActions, productsReducer} from "../index";
 
-let startState: ProductDomainType[] = []
+let startState: IProductInStore[] = []
 
 test('fetched products should be added in state', () => {
     const fetchedProducts = [

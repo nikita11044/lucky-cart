@@ -1,15 +1,15 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ProductDomainType, ProductType} from "../../../api/types";
+import {IProductInStore, IProductType} from "../../../api/types";
 import {productsAPI} from "../../../api/shop-api";
 import {ThunkError} from "../../../utils/types";
 
-const fetchProducts = createAsyncThunk<{ products: ProductDomainType[] }, undefined, ThunkError>('products/fetchProducts', async (arg, thunkAPI) => {
+const fetchProducts = createAsyncThunk<{ products: IProductInStore[] }, undefined, ThunkError>('products/fetchProducts', async (arg, thunkAPI) => {
     try {
-        const products = [] as ProductDomainType[]
+        const products = [] as IProductInStore[]
         const querySnapshot = await productsAPI.getProducts()
         if (!querySnapshot.empty) {
             querySnapshot.forEach(doc => {
-                const productData = doc.data() as ProductType
+                const productData = doc.data() as IProductType
                 products.push({
                     id: doc.id,
                     ...productData
@@ -30,7 +30,7 @@ export const asyncActions = {
 
 export const slice = createSlice({
     name: 'products',
-    initialState: [] as ProductDomainType[],
+    initialState: [] as IProductInStore[],
     reducers: {},
     extraReducers: builder => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
