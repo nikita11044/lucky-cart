@@ -25,7 +25,7 @@ test('selected product should be removed from cart', () => {
 })
 
 test('quantity of product in cart should be changed correctly', () => {
-    const endState = cartReducer(startState, cartActions.changeProductQuantityInCart({id: '1', quantityInCart: 10}))
+    const endState = cartReducer(startState, cartActions.changeProductQuantityInCart({id: '1', quantityInCart: 3}))
 
-    expect(endState[0].quantity).toBe(10)
+    expect(endState[0].quantityInCart).toBe(3)
 })

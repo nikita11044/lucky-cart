@@ -11,6 +11,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import {IProductInCart} from "../../../api/types";
 import {useActions} from "../../../utils/redux-utils";
 import {cartActions} from "../index";
+import {Price} from "../../../components/Price";
 
 const useStyles = makeStyles({
     root: {
@@ -38,6 +39,9 @@ const useStyles = makeStyles({
         alignItems: 'center'
     },
     price: {
+        fontWeight: "bold"
+    },
+    formerPrice: {
         display: 'inline-block',
         // fontSize: 20,
         // fontWeight: 'bold',
@@ -97,13 +101,9 @@ export const ProductInCart = React.memo(function ({product}: PropsType) {
         title
     } = product
 
-    const currentPrice = discount === 0
-        ? price
-        : (product.price * product.discount).toFixed(2)
-
     const changeProductQuantityCallback = useCallback((e) => {
         if (e.currentTarget.dataset.math) {
-            // debugger
+            debugger
             const trigger: string = e.currentTarget.dataset.math
             if (trigger === '+') {
                 const newQuantity = quantityInCart + 1
@@ -119,7 +119,7 @@ export const ProductInCart = React.memo(function ({product}: PropsType) {
                 }
             }
         }
-    }, [])
+    }, [quantityInCart])
 
     return (
         <Card className={classes.root + ' ' + classes.shadow}>
@@ -129,7 +129,7 @@ export const ProductInCart = React.memo(function ({product}: PropsType) {
             />
             <div className={classes.contentInnerWrapper}>
                 <CardContent className={classes.content}>
-                    <Typography className={classes.price} component={'h4'}>{'$' + currentPrice }</Typography>
+                    <Price price={price} discount={discount}/>
                     <Typography component={'h5'}>{title}</Typography>
                 </CardContent>
                 <Typography className={classes.description}>{description}</Typography>

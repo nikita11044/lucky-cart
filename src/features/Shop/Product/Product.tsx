@@ -10,6 +10,7 @@ import {Badge} from "@material-ui/core";
 import {IProductInStore} from "../../../api/types";
 import {useActions} from "../../../utils/redux-utils";
 import {cartActions} from "../../Cart";
+import {Price} from "../../../components/Price";
 
 const useStyles = makeStyles({
     root: {
@@ -84,31 +85,32 @@ export const Product = React.memo(function ({product}: PropsType) {
 
     const {addProductToCart} = useActions(cartActions)
 
+    const {
+        description,
+        price,
+        discount,
+        imageURL,
+        title
+    } = product
+
     return (
         <Card className={classes.root + ' ' + classes.shadow}>
             <CardMedia
                 className={classes.media}
-                image={product.imageURL}
+                image={imageURL}
             />
             <CardContent className={classes.content}>
                 {
-                    product.discount !== 0
-                    && <Badge className={classes.discount} badgeContent={`-${Math.round(product.discount * 100)}%`} color={'primary'}/>
+                    discount !== 0
+                    && <Badge className={classes.discount} badgeContent={`-${Math.round(discount * 100)}%`} color={'primary'}/>
                 }
                 <div style={ {display: 'flex', flexDirection: 'column', alignItems: 'center'} }>
-                    {
-                        product.discount !== 0
-                        && <div style={ {display: "flex", gap: '5px'} }>
-                            <Typography className={classes.price}>{'$' + (product.price * product.discount).toFixed(2) }</Typography>
-                            <Typography className={classes.formerPrice} component={'h4'}>{'$' + product.price}</Typography>
-                        </div>
-                        || <Typography className={classes.price}>{'$' + product.price}</Typography>
-                    }
+                    <Price price={price} discount={discount}/>
                     <Typography className={classes.title} component={'h5'}>
-                        {product.title}
+                        {title}
                     </Typography>
                     <Typography className={classes.description}>
-                        {product.description}
+                        {description}
                     </Typography>
                 </div>
             </CardContent>

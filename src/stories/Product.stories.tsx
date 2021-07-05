@@ -1,10 +1,12 @@
 import {Product} from "../features/Shop/Product/Product";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import React from "react";
+import {HashRouterDecorator, ReduxStoryProviderDecorator} from "./decorators/ReduxStoreProvider";
 
 export default {
     title: 'Shop Stories',
-    component: Product
+    component: Product,
+    decorators: [ReduxStoryProviderDecorator, HashRouterDecorator],
 } as ComponentMeta<typeof Product>
 
 const Template: ComponentStory<typeof Product> = (args) => <Product {...args}/>;
