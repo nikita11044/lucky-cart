@@ -4,7 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 type PricePropsType = {
     price: number,
-    discount: number
+    priceWithDiscount?: number
 }
 
 const useStyles = makeStyles({
@@ -31,15 +31,17 @@ const useStyles = makeStyles({
     }
 });
 
-export const Price = React.memo(({price, discount}: PricePropsType) => {
+export const Price = React.memo(({price, priceWithDiscount}: PricePropsType) => {
     const classes = useStyles()
+
+    console.log(priceWithDiscount)
 
     return <>
         {
-            discount !== 0
+            priceWithDiscount
             && <div style={ {display: "flex", gap: '5px'} }>
-                <Typography className={classes.price}>{'$' + (price * discount).toFixed(2) }</Typography>
-                <Typography className={classes.formerPrice} component={'h4'}>{'$' + price}</Typography>
+                <Typography className={classes.price}>{'$' + priceWithDiscount}</Typography>
+                <Typography className={classes.formerPrice} component={'h4'}>{'$' + price }</Typography>
             </div>
             || <Typography className={classes.price}>{'$' + price}</Typography>
         }

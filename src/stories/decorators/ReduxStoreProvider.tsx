@@ -2,7 +2,7 @@ import {combineReducers} from "redux";
 import {productsReducer} from "../../features/Shop";
 import {cartReducer} from "../../features/Cart";
 import {AppRootStateType} from "../../utils/types";
-import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 import thunkMiddleware from "redux-thunk";
 import {Provider} from "react-redux";
 import {HashRouter} from "react-router-dom";

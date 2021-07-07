@@ -10,10 +10,9 @@ const fetchProducts = createAsyncThunk<{ products: IProductInStore[] }, undefine
         if (!querySnapshot.empty) {
             querySnapshot.forEach(doc => {
                 const productData = doc.data() as IProductType
-                products.push({
-                    id: doc.id,
-                    ...productData
-                })
+                const product: IProductInStore = {...productData, id: doc.id}
+                if (product.discount) product.priceWithDiscount = +(product.price * product.discount).toFixed(2)
+                products.push(product)
             })
             return {products: products}
         } else {

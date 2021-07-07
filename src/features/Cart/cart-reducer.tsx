@@ -1,12 +1,14 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IProductInCart} from "../../api/types";
 
+const initialState: CartStateType = {
+    cart: [],
+    totalPrice: 0
+}
+
 export const slice = createSlice({
     name: 'cart',
-    initialState: {
-        cart: [] as IProductInCart[],
-        totalPrice: 0
-    },
+    initialState,
     reducers: {
         addProductToCart(state, action: PayloadAction<{ product: IProductInCart }>) {
             const index = state.cart.findIndex(product => product.id === action.payload.product.id)
@@ -24,6 +26,15 @@ export const slice = createSlice({
         changeProductQuantityInCart(state, action: PayloadAction<{ id: string, quantityInCart: number }>) {
             const index = state.cart.findIndex(product => product.id === action.payload.id)
             state.cart[index].quantityInCart = action.payload.quantityInCart
+        },
+        changeTotalPrice(state, action: PayloadAction<{ id: string, newTotalPrice: number }>) {
+            const index = state.cart.findIndex(product => product.id === action.payload.id)
         }
     },
 })
+
+// types
+type CartStateType = {
+    cart: IProductInCart[],
+    totalPrice: number
+}

@@ -96,18 +96,18 @@ export const ProductInCart = React.memo(function ({product}: PropsType) {
         quantity,
         quantityInCart,
         price,
-        discount,
+        priceWithDiscount,
         imageURL,
         title
     } = product
 
     const changeProductQuantityCallback = useCallback((e) => {
         if (e.currentTarget.dataset.math) {
-            debugger
             const trigger: string = e.currentTarget.dataset.math
             if (trigger === '+') {
                 const newQuantity = quantityInCart + 1
                 if (newQuantity <= quantity) changeProductQuantityInCart({id: id, quantityInCart: newQuantity})
+
             } else {
                 if (trigger === '-') {
                     const newQuantity = quantityInCart - 1
@@ -129,7 +129,10 @@ export const ProductInCart = React.memo(function ({product}: PropsType) {
             />
             <div className={classes.contentInnerWrapper}>
                 <CardContent className={classes.content}>
-                    <Price price={price} discount={discount}/>
+                    {/*<Price price={price} priceWithDiscount={priceWithDiscount}/>*/}
+                    {
+                        priceWithDiscount && <Price price={priceWithDiscount}/>
+                    }
                     <Typography component={'h5'}>{title}</Typography>
                 </CardContent>
                 <Typography className={classes.description}>{description}</Typography>

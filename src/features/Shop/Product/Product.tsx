@@ -89,6 +89,7 @@ export const Product = React.memo(function ({product}: PropsType) {
         description,
         price,
         discount,
+        priceWithDiscount,
         imageURL,
         title
     } = product
@@ -101,11 +102,11 @@ export const Product = React.memo(function ({product}: PropsType) {
             />
             <CardContent className={classes.content}>
                 {
-                    discount !== 0
+                    discount
                     && <Badge className={classes.discount} badgeContent={`-${Math.round(discount * 100)}%`} color={'primary'}/>
                 }
                 <div style={ {display: 'flex', flexDirection: 'column', alignItems: 'center'} }>
-                    <Price price={price} discount={discount}/>
+                    <Price price={price} priceWithDiscount={priceWithDiscount}/>
                     <Typography className={classes.title} component={'h5'}>
                         {title}
                     </Typography>

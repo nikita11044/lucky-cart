@@ -4,8 +4,15 @@ export interface IProductType {
     description: string
     imageURL: string
     quantity: number
-    discount: number
+    discount?: number
 }
 
-export interface IProductInStore extends IProductType {id: string}
-export interface IProductInCart extends IProductType {id: string, quantityInCart: number}
+export interface IProductInStore extends IProductType {
+    id: string,
+    priceWithDiscount?: number}
+
+export interface IProductInCart extends IProductType {
+    id: string,
+    quantityInCart: number,
+    priceWithDiscount?: number
+}
