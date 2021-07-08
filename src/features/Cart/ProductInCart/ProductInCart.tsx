@@ -106,13 +106,13 @@ export const ProductInCart = React.memo(function ({product}: PropsType) {
             const trigger: string = e.currentTarget.dataset.math
             if (trigger === '+') {
                 const newQuantity = quantityInCart + 1
-                if (newQuantity <= quantity) changeProductQuantityInCart({id: id, quantityInCart: newQuantity})
+                if (newQuantity <= quantity) changeProductQuantityInCart({id, newQuantity, trigger})
 
             } else {
                 if (trigger === '-') {
                     const newQuantity = quantityInCart - 1
                     if (newQuantity > 0) {
-                        changeProductQuantityInCart({id: id, quantityInCart: newQuantity})
+                        changeProductQuantityInCart({id, newQuantity, trigger})
                     } else {
                         removeProductFromCart({id: id})
                     }
@@ -129,9 +129,10 @@ export const ProductInCart = React.memo(function ({product}: PropsType) {
             />
             <div className={classes.contentInnerWrapper}>
                 <CardContent className={classes.content}>
-                    {/*<Price price={price} priceWithDiscount={priceWithDiscount}/>*/}
                     {
-                        priceWithDiscount && <Price price={priceWithDiscount}/>
+                        priceWithDiscount
+                        && <Price price={price} priceWithDiscount={priceWithDiscount}/>
+                        || <Price price={price}/>
                     }
                     <Typography component={'h5'}>{title}</Typography>
                 </CardContent>
