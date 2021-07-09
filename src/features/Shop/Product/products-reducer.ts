@@ -2,9 +2,12 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {IProductInStore, IProductType} from "../../../api/types";
 import {productsAPI} from "../../../api/shop-api";
 import {ThunkError} from "../../../utils/types";
+import {appActions} from "../../CommonActions/App";
+
 
 const fetchProducts = createAsyncThunk<{ products: IProductInStore[] }, undefined, ThunkError>('products/fetchProducts', async (arg, thunkAPI) => {
     try {
+        thunkAPI.dispatch(appActions.setAppStatus({status: 'loading'}))
         const products = [] as IProductInStore[]
         const querySnapshot = await productsAPI.getProducts()
         if (!querySnapshot.empty) {
@@ -14,6 +17,7 @@ const fetchProducts = createAsyncThunk<{ products: IProductInStore[] }, undefine
                 if (product.discount) product.priceWithDiscount = +(product.price * product.discount).toFixed(2)
                 products.push(product)
             })
+            thunkAPI.dispatch(appActions.setAppStatus({status: 'succeeded'}))
             return {products: products}
         } else {
             return thunkAPI.rejectWithValue('No products found')

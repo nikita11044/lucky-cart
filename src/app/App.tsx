@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.css';
-import {AppBar, Badge, Container, IconButton, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Badge, Container, IconButton, LinearProgress, Toolbar, Typography} from "@material-ui/core";
 import {ShoppingCartOutlined} from "@material-ui/icons";
 import {NavLink, Route} from 'react-router-dom';
 import {Cart, cartSelectors} from "../features/Cart";
 import {Shop} from "../features/Shop";
 import {useSelector} from "react-redux";
+import {appSelectors} from "../features/Application";
 
 function App() {
 
+    const status = useSelector(appSelectors.selectStatus)
     const productsInCart = useSelector(cartSelectors.selectProductsInCart)
 
     return (
@@ -27,6 +29,7 @@ function App() {
                         </IconButton>
                     </NavLink>
                 </Toolbar>
+                {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
                 <Route exact path={'/'} render={() => <Shop/>}/>

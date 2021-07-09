@@ -57,7 +57,12 @@ const initialGlobalState: AppRootStateType = {
             discount: 0,
             title: 'Defender Scrapper 500 headphones'
         }
-    ]
+    ],
+    app: {
+        status: 'idle',
+        error: null,
+        isInitialized: false
+    }
 }
 
 export const storyBookStore = configureStore({

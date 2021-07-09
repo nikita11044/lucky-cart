@@ -5,10 +5,12 @@ import {configureStore} from "@reduxjs/toolkit";
 import {cartReducer} from "../features/Cart";
 import {AppRootStateType} from "../utils/types";
 import {loadState, saveState} from "../utils/store-utils";
+import {appReducer} from "../features/Application";
 
 export const rootReducer = combineReducers({
     products: productsReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    app: appReducer
 })
 
 const persistedState: AppRootStateType = loadState()
@@ -22,7 +24,8 @@ export const store = configureStore({
 store.subscribe(() => {
     saveState({
         products: store.getState().products,
-        cart: store.getState().cart
+        cart: store.getState().cart,
+        app: store.getState().app
     })
 })
 
