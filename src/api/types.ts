@@ -16,3 +16,11 @@ export interface IProductInCart extends IProductType {
     quantityInCart: number,
     priceWithDiscount?: number
 }
+
+export type OrderInfoType = {
+    name: string,
+    surname: string,
+    address: string,
+    phone: string,
+    products: IProductInCart[]
+}

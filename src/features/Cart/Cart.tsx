@@ -31,7 +31,7 @@ export const Cart: React.FC = () => {
             }
         </Grid>
         <Grid item wrap={'nowrap'}>
-            <OrderForm/>
+            <OrderForm products={productsInCart}/>
         </Grid>
     </Grid>
 }

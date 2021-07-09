@@ -43,7 +43,7 @@ export const slice = createSlice({
     },
 })
 
-// helper functions
+// helpers
 
 function calculatePrice(totalPrice: number, price: number, quantity: number, trigger: '+' | '-', priceWithDiscount?: number) {
     switch (trigger) {
